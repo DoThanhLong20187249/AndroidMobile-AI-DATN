@@ -1,29 +1,33 @@
 package com.example.antispoofingfacerecognition;
 
-import com.google.android.gms.common.api.internal.IStatusCallback;
 import com.google.mlkit.vision.facemesh.FaceMeshPoint;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonFace {
-    private static ArrayList<String> userName = new ArrayList<>();
-    private static ArrayList<ArrayList<Double>> points = new ArrayList<ArrayList<Double>>();
+    public static ArrayList<String> userName = new ArrayList<>();
+    public static ArrayList<ArrayList<Double>> facePoints = new ArrayList<ArrayList<Double>>();
 
     // lấy ra tên người dùng ở vị trí nào đó
     public static String getUserName(int userIndex) {
         return userName.get(userIndex);
     }
 
+    public static void clearData(){
+        userName.clear();
+        facePoints.clear();
+    }
+
     public static ArrayList<Double> getLastPoint() {
-        return points.get(points.size() - 1);
+        return facePoints.get(facePoints.size() - 1);
     }
     public static String getLastUserName() {
         return userName.get(userName.size() -1);
     }
 
     public static int getPointsSize() {
-        return points.size();
+        return facePoints.size();
     }
 
     // trả về độ dài mảng user
@@ -34,15 +38,15 @@ public class PersonFace {
     // thêm user mới vào mảng
     public static void addUser(String name) {
         userName.add(name);
-        points.add(new ArrayList<>());
+        facePoints.add(new ArrayList<>());
     }
 
     // thêm tọa độ điểm vào mảng khuôn mặt
     public static void addPoint(FaceMeshPoint p) {
         int lastIndex = userName.size() - 1;
-        points.get(lastIndex).add((double) p.getPosition().getX());
-        points.get(lastIndex).add((double) p.getPosition().getY());
-        points.get(lastIndex).add((double) p.getPosition().getZ());
+        facePoints.get(lastIndex).add((double) p.getPosition().getX());
+        facePoints.get(lastIndex).add((double) p.getPosition().getY());
+        facePoints.get(lastIndex).add((double) p.getPosition().getZ());
 
 
     }
@@ -53,15 +57,15 @@ public class PersonFace {
     private static double[] computeEdgeOfTriangle(int userIndex, int i) {
         double[] tmp = new double[3];
         int startIndex = i * 9;
-        double x0 = points.get(userIndex).get(startIndex + 0);
-        double y0 = points.get(userIndex).get(startIndex + 1);
-        double z0 = points.get(userIndex).get(startIndex + 2);
-        double x1 = points.get(userIndex).get(startIndex + 3);
-        double y1 = points.get(userIndex).get(startIndex + 4);
-        double z1 = points.get(userIndex).get(startIndex + 5);
-        double x2 = points.get(userIndex).get(startIndex + 6);
-        double y2 = points.get(userIndex).get(startIndex + 7);
-        double z2 = points.get(userIndex).get(startIndex + 8);
+        double x0 = facePoints.get(userIndex).get(startIndex + 0);
+        double y0 = facePoints.get(userIndex).get(startIndex + 1);
+        double z0 = facePoints.get(userIndex).get(startIndex + 2);
+        double x1 = facePoints.get(userIndex).get(startIndex + 3);
+        double y1 = facePoints.get(userIndex).get(startIndex + 4);
+        double z1 = facePoints.get(userIndex).get(startIndex + 5);
+        double x2 = facePoints.get(userIndex).get(startIndex + 6);
+        double y2 = facePoints.get(userIndex).get(startIndex + 7);
+        double z2 = facePoints.get(userIndex).get(startIndex + 8);
 
         tmp[0] = (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0) + (z1 - z0) * (z1 - z0);
         tmp[1] = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) + (z2 - z1) * (z2 - z1);

@@ -155,5 +155,7 @@
     <string name="pref_title_face_mesh_use_case" translatable="false">Use Case</string>
     <string name="pref_key_face_mesh_use_case" translatable="false">face_mesh_use_case</string>
     <string name="detect">Detect!</string>
-    <string name="save">Save</string>>
+    <string name="reset">Delete Data</string>
+    <string name="save">Save</string>
+    <string name="detectimage">DetectImage</string>>
 </resources>

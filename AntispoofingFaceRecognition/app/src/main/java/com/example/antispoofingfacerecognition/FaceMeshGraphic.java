@@ -24,10 +24,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.util.Log;
 
+import com.example.antispoofingfacerecognition.Utils.PreferenceUtils;
 import com.google.mlkit.vision.common.PointF3D;
-import com.google.mlkit.vision.common.Triangle;
 
 import com.google.mlkit.vision.facemesh.FaceMesh;
 import com.google.mlkit.vision.facemesh.FaceMesh.ContourType;
@@ -41,8 +40,7 @@ import java.util.List;
  * Graphic instance for rendering face position and mesh info within the associated graphic overlay
  * view.
  */
-public class
-FaceMeshGraphic extends GraphicOverlay.Graphic {
+public class FaceMeshGraphic extends GraphicOverlay.Graphic {
   private static final int USE_CASE_CONTOUR_ONLY = 999;
 
   private static final float FACE_POSITION_RADIUS = 5.0f;
